@@ -1966,7 +1966,9 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
-function AppNavbar() {
+function AppNavbar({
+  user
+}) {
   const navbarStyle = {
     marginBottom: "25px"
   };
@@ -1982,11 +1984,23 @@ function AppNavbar() {
     id: "basic-navbar-nav"
   }, __jsx(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_4___default.a, {
     className: "mr-auto"
-  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+  }, user && __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/share-thought"
   }, __jsx("a", {
     className: "nav-link"
-  }, "New Thought"))))));
+  }, "New Thought")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    href: "/profile"
+  }, __jsx("a", {
+    className: "nav-link"
+  }, "Profile")), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    href: "/logout"
+  }, __jsx("a", {
+    className: "nav-link"
+  }, "Log Out"))), !user && __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    href: "/login"
+  }, __jsx("a", {
+    className: "nav-link"
+  }, "Log In"))))));
 }
 
 /***/ }),
@@ -2013,6 +2027,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Navbar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Navbar */ "./components/Navbar.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -2020,12 +2041,45 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
+  static async getInitialProps({
+    Component,
+    ctx
+  }) {
+    let pageProps = {};
+
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx);
+    }
+
+    if (ctx.req && ctx.req.session.passport) {
+      pageProps.user = ctx.req.session.passport.user;
+    }
+
+    return {
+      pageProps
+    };
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: props.pageProps.user
+    };
+  }
+
   render() {
     const {
       Component,
       pageProps
     } = this.props;
-    return __jsx("div", null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_2___default.a, null, __jsx("title", null, "Thoughts!")), __jsx(_components_Navbar__WEBPACK_IMPORTED_MODULE_5__["default"], null), __jsx(react_bootstrap_Jumbotron__WEBPACK_IMPORTED_MODULE_4___default.a, null, __jsx(Component, pageProps)));
+
+    const props = _objectSpread({}, pageProps, {
+      user: this.state.user
+    });
+
+    return __jsx("div", null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_2___default.a, null, __jsx("title", null, "Thoughts!")), __jsx(_components_Navbar__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      user: this.state.user
+    }), __jsx("div", null, __jsx(react_bootstrap_Jumbotron__WEBPACK_IMPORTED_MODULE_4___default.a, null, __jsx(Component, props))));
   }
 
 }

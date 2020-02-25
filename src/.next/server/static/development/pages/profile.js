@@ -88,94 +88,56 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./pages/share-thought.js":
-/*!********************************!*\
-  !*** ./pages/share-thought.js ***!
-  \********************************/
+/***/ "./pages/profile.js":
+/*!**************************!*\
+  !*** ./pages/profile.js ***!
+  \**************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ShareThought; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Form */ "react-bootstrap/Form");
-/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/router */ "next/router");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Button */ "react-bootstrap/Button");
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Container */ "react-bootstrap/Container");
-/* harmony import */ var react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_1__);
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
+const Picture = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.img.withConfig({
+  displayName: "profile__Picture",
+  componentId: "sc-1t3srn2-0"
+})(["border-radius:50%;border:3px solid white;width:100px;"]);
 
-
-
-
-const {
-  useState
-} = __webpack_require__(/*! react */ "react");
-
-function ShareThought() {
-  const [message, setMessage] = useState("");
-
-  async function submit(event) {
-    event.preventDefault();
-    await fetch("/api/thoughts", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        message
-      })
-    });
-    next_router__WEBPACK_IMPORTED_MODULE_2___default.a.push("/");
-  }
-
-  return __jsx(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_4___default.a, null, __jsx(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    onSubmit: submit
-  }, __jsx(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1___default.a.Group, null, __jsx(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1___default.a.Label, null, "What is in your mind?"), __jsx(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1___default.a.Control, {
-    type: "text",
-    placeholder: "Say something",
-    onChange: e => setMessage(e.target.value),
-    value: message
-  })), __jsx(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    variant: "primary",
-    type: "submit"
-  }, "Share")));
+function Profile({
+  user
+}) {
+  return __jsx("div", null, __jsx("h2", null, __jsx(Picture, {
+    src: user.picture,
+    alt: user.displayName
+  }), " Hello, ", user.displayName), __jsx("p", null, "This is what we know about you:"), __jsx("ul", null, Object.keys(user).map(key => __jsx("li", {
+    key: key
+  }, key, ": ", user[key].toString()))));
 }
+
+/* harmony default export */ __webpack_exports__["default"] = (Profile);
 
 /***/ }),
 
-/***/ 5:
-/*!**************************************!*\
-  !*** multi ./pages/share-thought.js ***!
-  \**************************************/
+/***/ 4:
+/*!********************************!*\
+  !*** multi ./pages/profile.js ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Projects\gol-express\src\pages\share-thought.js */"./pages/share-thought.js");
+module.exports = __webpack_require__(/*! C:\Projects\gol-express\src\pages\profile.js */"./pages/profile.js");
 
-
-/***/ }),
-
-/***/ "next/router":
-/*!******************************!*\
-  !*** external "next/router" ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("next/router");
 
 /***/ }),
 
@@ -190,38 +152,16 @@ module.exports = require("react");
 
 /***/ }),
 
-/***/ "react-bootstrap/Button":
-/*!*****************************************!*\
-  !*** external "react-bootstrap/Button" ***!
-  \*****************************************/
+/***/ "styled-components":
+/*!************************************!*\
+  !*** external "styled-components" ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("react-bootstrap/Button");
-
-/***/ }),
-
-/***/ "react-bootstrap/Container":
-/*!********************************************!*\
-  !*** external "react-bootstrap/Container" ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("react-bootstrap/Container");
-
-/***/ }),
-
-/***/ "react-bootstrap/Form":
-/*!***************************************!*\
-  !*** external "react-bootstrap/Form" ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("react-bootstrap/Form");
+module.exports = require("styled-components");
 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=share-thought.js.map
+//# sourceMappingURL=profile.js.map
